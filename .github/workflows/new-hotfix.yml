@@ -1,11 +1,7 @@
 name: "Create new hotfix"
 
 on:
-  workflow_dispatch:
-    inputs:
-      version:
-        description: 'The version you want to release. (use branch MAIN!!!)'
-        required: true
+  workflow_call:
 
 jobs:
   draft-new-hotfix:
