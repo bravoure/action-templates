@@ -2,16 +2,6 @@ name: Create draft pull request
 
 on:
   workflow_call:
-    inputs:
-      ref:
-        required: true
-        type: string
-      actor:
-        required: true
-        type: string
-    secrets:
-      ghToken:
-        required: true
 
 jobs:
   create-pr:
@@ -23,16 +13,16 @@ jobs:
       - name: Create feature pr
         uses: thomaseizinger/create-pull-request@1.2.0
         env:
-          GITHUB_TOKEN: ${{ secrets.ghToken }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          head: ${{ inputs.ref }}
+          head: ${{ github.event.ref }}
           base: develop
-          title: Merge ${{ inputs.ref }} into develop branch
+          title: Merge ${{ github.event.ref }} into develop branch
           draft: true
           body: |
             This pr was created when this branch was created, merge it when your feature is finished!
 
-            Of course @${{ inputs.actor }} never forgets something. But did you check?
+            Of course @${{ github.actor }} never forgets something. But did you check?
             - [ ] Image sizes are correct. For all our screen sizes.
             - [ ] Checked latest version Chrome (Mac, Windows, ios, Ipad os, android)
             - [ ] Checked latest version Edge (Mac, Windows)
@@ -49,5 +39,5 @@ jobs:
             - [ ] Hover states
             - [ ] External link rel=”noreferrer”
             - [ ] Image alt tags
-            - [ ] SSR  of pages (Check in the soucre of the page if the html is there. If you see a loader when loading the page there is an issue.)
+            - [ ] SSR  of pages (Check in the source of the page if the html is there. If you see a loader when loading the page there is an issue.)
             - [ ] Double check your work with the design file.
