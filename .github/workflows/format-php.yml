@@ -1,0 +1,25 @@
+name: Format (PHP)
+
+on:
+  workflow_call:
+
+jobs:
+  php-cs-fixer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+
+      - run: touch backend/.env
+
+      - name: Start containers
+        run: docker-compose run --rm php-cs-fixer
+
+      - run: rm backend/.env
+
+      - name: Commit & push
+        run: |
+          git config user.name "GitHub actions"
+          git config user.email noreply@github.com
+          git diff-index --quiet HEAD || (git commit -a -m'[bot] Format php' && git push origin ${{ github.head_ref }})
