@@ -19,4 +19,24 @@ jobs:
           base: develop
           title: Merge ${{ github.event.ref }} into develop branch
           draft: true
-          body: This pr was created when this branch was created, merge it when your feature is finished!
+          body: |
+            This pr was created when this branch was created, merge it when your feature is finished!
+            Of course @${{ github.actor }} never forgets something. But did you check?
+            - [ ] Image sizes are correct. For all our screen sizes.
+            - [ ] Checked latest version Chrome (Mac, Windows, ios, Ipad os, android)
+            - [ ] Checked latest version Edge (Mac, Windows)
+            - [ ] Checked latest version Firefox (Mac, Windows)
+            - [ ] Checked latest version Safari (Mac, ios, iPad os)
+            - [ ] Checked Desktop
+            - [ ] Checked Tablet on a actual tablet or simulator
+            - [ ] Checked Mobile on a actual or simulator
+            - [ ] Check for iphone 5 screen size. It should just work.
+            - [ ] Remove console.logs & commented out code
+            - [ ] Check TODO's in code
+            - [ ] Correct usage of heading tags (H1, H2, etc)
+            - [ ] Animations
+            - [ ] Hover states
+            - [ ] External link rel=”noreferrer”
+            - [ ] Image alt tags
+            - [ ] SSR  of pages (Check in the source of the page if the html is there. If you see a loader when loading the page there is an issue.)
+            - [ ] Double check your work with the design file.
