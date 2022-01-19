@@ -1,10 +1,10 @@
-name: Format (PHP)
+name: Format and update browserslist
 
 on:
   workflow_call:
 
 jobs:
-  php-cs-fixer:
+  housekeeping:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -15,6 +15,9 @@ jobs:
 
       - name: Start containers
         run: docker-compose run --rm php-cs-fixer
+
+      - name: Start containers
+        run: docker-compose run --rm frontend npx --yes browserslist@latest --update-db
 
       - run: rm backend/.env
 
