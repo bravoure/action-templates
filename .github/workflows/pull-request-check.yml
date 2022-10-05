@@ -2,6 +2,9 @@ name: Build, Run, Test, Lint and Succeed.
 
 on:
   workflow_call:
+    secrets:
+        GH_PAT:
+          required: true
   
 jobs:
   checks:
