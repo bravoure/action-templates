@@ -41,7 +41,7 @@ jobs:
           cp backend/.env.actions.example backend/.env
           cp frontend/.env.local.actions frontend/.env.local
           printf "%s\n" "<?php" "	return [" "'allowAdminChanges' => false" "];" >backend/config/local_config.php
-          composer config --global github-oauth.github.com $GH_PAT
+          composer config --global github-oauth.github.com $GITHUB_TOKEN
           docker-compose -f docker-compose.ghactions.yml up -d mariadb
           docker-compose -f docker-compose.ghactions.yml run --rm composer composer install
 
