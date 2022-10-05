@@ -1,0 +1,92 @@
+name: Build, Run, Test, Lint and Succeed.
+
+on:
+  workflow_call:
+  
+jobs:
+  checks:
+    name: Linter
+    runs-on: ubuntu-latest
+    concurrency:
+      group: pr-${{ github.head_ref }}
+      cancel-in-progress: true
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v1
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '16.14.0'
+      # Caches npm modules until yarn.lock changes.
+      - uses: actions/cache@v2
+        with:
+          path: '**/frontend/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: Installing dependencies 📦
+        run: cd frontend && yarn install --frozen-lockfile
+      - name: Running linter 🔍
+        run: cd frontend && yarn lint-pr
+
+  build:
+    name: Build & test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Composer install
+        env: # Or as an environment variable
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+        run: |
+          cp backend/.env.actions.example backend/.env
+          cp frontend/.env.local.actions frontend/.env.local
+          printf "%s\n" "<?php" "	return [" "'allowAdminChanges' => false" "];" >backend/config/local_config.php
+          composer config --global github-oauth.github.com $GITHUB_TOKEN
+          docker-compose -f docker-compose.ghactions.yml up -d mariadb
+          docker-compose -f docker-compose.ghactions.yml run --rm composer composer install
+
+      - name: Craft install
+        run: |
+          chmod -R 777 backend/storage
+          chmod -R 777 backend/web
+          docker-compose -f docker-compose.ghactions.yml run --rm queue php craft install/craft --email login@bravoure.nl --language en-GB --password bravoure --site-name "Oude Kerk Nederlands" --site-url @siteUrlOudeKerkNederlands
+          docker-compose -f docker-compose.ghactions.yml run --rm queue php craft project-seeder-module/seeder/seed-db
+          docker-compose -f docker-compose.ghactions.yml run --rm queue php craft resave/entries
+
+      - name: Start environment
+        run: |
+          docker-compose -f docker-compose.ghactions.yml up -d webserver queue redis backend mariadb
+
+      - name: Frontend build
+        working-directory: frontend
+        run: |
+          nvm install && npm i -g yarn
+          yarn install && yarn run build && (yarn run start&)
+
+      - name: Install Cypress and run tests
+        uses: cypress-io/github-action@v4
+        with:
+          working-directory: e2e
+
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: cypress-screenshots
+          path: e2e/cypress/screenshots
+
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: cypress-videos
+          path: e2e/cypress/videos
+
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: craft-logs
+          path: backend/storage/logs
+
+      - name: Webserver logs
+        if: always()
+        run: |
+          docker-compose -f docker-compose.ghactions.yml logs webserver
