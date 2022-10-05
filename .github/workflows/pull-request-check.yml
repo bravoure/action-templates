@@ -6,6 +6,12 @@ on:
         SITE_URL:
           required: true
           type: string
+        SITE_NAME:
+          required: true
+          type: string
+        LANGUAGE:
+          required: true
+          type: string
     secrets:
         GH_PAT:
           required: true
