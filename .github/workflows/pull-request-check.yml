@@ -37,6 +37,20 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: "Validate composer.json and composer.lock"
+        run: "cd backend && composer validate --strict"
+
+      - name: "Determine composer cache directory"
+        id: "determine-composer-cache-directory"
+        run: "echo \"::set-output name=directory::$(composer config cache-dir)\""
+
+      - name: "Cache dependencies installed with composer"
+        uses: "actions/cache@v2.0.0"
+        with:
+          path: "${{ steps.determine-composer-cache-directory.outputs.directory }}"
+          key: "php-composer-${{ hashFiles('backend/composer.lock') }}"
+          restore-keys: "php-composer-"
+
       - name: Composer install
         env: # Or as an environment variable
           GITHUB_TOKEN: ${{ secrets.GH_PAT }}
@@ -46,13 +60,7 @@ jobs:
           printf "%s\n" "<?php" "	return [" "'allowAdminChanges' => false" "];" >backend/config/local_config.php
           composer config --global github-oauth.github.com $GITHUB_TOKEN
           docker-compose -f docker-compose.ghactions.yml up -d mariadb
-          docker-compose -f docker-compose.ghactions.yml run --rm composer composer install
-
-      - name: Debug
-        run: |
-          ls ~
-          ls ~/.composer
-          ls
+          cd backend && composer install
 
       - name: Craft install
         run: |
