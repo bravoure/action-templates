@@ -48,6 +48,12 @@ jobs:
           docker-compose -f docker-compose.ghactions.yml up -d mariadb
           docker-compose -f docker-compose.ghactions.yml run --rm composer composer install
 
+      - name: Debug
+        run: |
+          ls ~
+          ls ~/.composer
+          ls
+
       - name: Craft install
         run: |
           chmod -R 777 backend/storage
