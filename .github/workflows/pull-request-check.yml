@@ -66,7 +66,7 @@ jobs:
         run: |
           chmod -R 777 backend/storage
           chmod -R 777 backend/web
-          docker-compose -f docker-compose.ghactions.yml run --rm queue php craft install/craft --email login@bravoure.nl --language $LANGUAGE --password bravoure --site-name $SITE_NAME --site-url $SITE_URL
+          docker-compose -f docker-compose.ghactions.yml run --rm queue php craft install/craft --email login@bravoure.nl --language "$LANGUAGE" --password bravoure --site-name "$SITE_NAME" --site-url "$SITE_URL"
           docker-compose -f docker-compose.ghactions.yml run --rm queue php craft project-seeder-module/seeder/seed-db
           docker-compose -f docker-compose.ghactions.yml run --rm queue php craft resave/entries
 
