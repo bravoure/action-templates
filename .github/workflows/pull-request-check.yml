@@ -2,16 +2,6 @@ name: Build, Run, Test, Lint and Succeed.
 
 on:
   workflow_call:
-    inputs:
-      SITE_URL:
-        required: true
-        type: string
-      SITE_NAME:
-        required: true
-        type: string
-      LANGUAGE:
-        required: true
-        type: string
     secrets:
       GH_PAT:
         required: true
@@ -59,14 +49,10 @@ jobs:
           docker-compose -f docker-compose.ghactions.yml run --rm composer composer install
 
       - name: Craft install
-        env: # Or as an environment variable
-          SITE_URL: ${{ inputs.SITE_URL }}
-          SITE_NAME: ${{ inputs.SITE_NAME }}
-          LANGUAGE: ${{ inputs.LANGUAGE }}
         run: |
           chmod -R 777 backend/storage
           chmod -R 777 backend/web
-          docker-compose -f docker-compose.ghactions.yml run --rm queue php craft install/craft --email login@bravoure.nl --language "$LANGUAGE" --password bravoure --site-name "$SITE_NAME" --site-url "$SITE_URL"
+          docker-compose -f docker-compose.ghactions.yml run --rm queue php craft install/craft --email login@bravoure.nl --password bravoure --interactive=0
           docker-compose -f docker-compose.ghactions.yml run --rm queue php craft project-seeder-module/seeder/seed-db
           docker-compose -f docker-compose.ghactions.yml run --rm queue php craft resave/entries
 
