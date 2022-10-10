@@ -6,6 +6,9 @@ on:
       GH_PAT:
         required: true
 
+env:
+  CYPRESS_CACHE_FOLDER: /home/runner/.cache/Cypress
+
 jobs:
   checks:
     name: Linter
@@ -86,7 +89,7 @@ jobs:
           yarn install && yarn run build && (yarn run start&)
 
       - name: Install Cypress and run tests
-        uses: cypress-io/github-action@v4
+        uses: cypress-io/github-action@v4.2.0
         with:
           working-directory: e2e
 
