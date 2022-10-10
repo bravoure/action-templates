@@ -16,12 +16,18 @@ jobs:
 
     steps:
       - name: Checkout the repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      # get the node version from the .nvmrc file
+      - name: Read .nvmrc
+        run: echo "##[set-output name=NVMRC;]$(cat frontend/.nvmrc)"
+        id: nvm
+
+      # setup node based on the version from the .nvmrc file, fetched in the previous step
+      - name: Setup Node.js (.nvmrc)
+        uses: actions/setup-node@v3.5.0
         with:
-          node-version: 16
+          node-version: "${{ steps.nvm.outputs.NVMRC }}"
 
       # Caches npm modules until yarn.lock changes.
       - uses: actions/cache@v2
@@ -82,11 +88,27 @@ jobs:
         run: |
           docker-compose -f docker-compose.ghactions.yml up -d webserver queue redis backend mariadb
 
+      # get the node version from the .nvmrc file
+      - name: Read .nvmrc
+        run: echo "##[set-output name=NVMRC;]$(cat frontend/.nvmrc)"
+        id: nvm
+
+      # setup node based on the version from the .nvmrc file, fetched in the previous step
+      - name: Setup Node.js (.nvmrc)
+        uses: actions/setup-node@v3.5.0
+        with:
+          node-version: "${{ steps.nvm.outputs.NVMRC }}"
+
+      # Caches npm modules until yarn.lock changes.
+      - uses: actions/cache@v2
+        with:
+          path: '**/frontend/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
       - name: Frontend build
         working-directory: frontend
         run: |
-          nvm install && npm i -g yarn
-          yarn install && yarn run build && (yarn run start&)
+          yarn run build && (yarn run start&)
 
       - name: Install Cypress and run tests
         uses: cypress-io/github-action@v4.2.0
