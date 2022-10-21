@@ -30,7 +30,7 @@ jobs:
           node-version: "${{ steps.nvm.outputs.NVMRC }}"
 
       # Caches npm modules until yarn.lock changes.
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         with:
           path: '**/frontend/node_modules'
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
@@ -59,7 +59,7 @@ jobs:
         run: "echo \"::set-output name=directory::$(composer config cache-dir)\""
 
       - name: "Cache dependencies installed with composer"
-        uses: "actions/cache@v2.0.0"
+        uses: "actions/cache@v3"
         with:
           path: "${{ steps.determine-composer-cache-directory.outputs.directory }}"
           key: "php-composer-${{ hashFiles('backend/composer.lock') }}"
@@ -100,7 +100,7 @@ jobs:
           node-version: "${{ steps.nvm.outputs.NVMRC }}"
 
       # Caches npm modules until yarn.lock changes.
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         with:
           path: '**/frontend/node_modules'
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
