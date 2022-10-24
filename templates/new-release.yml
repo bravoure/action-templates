@@ -1,0 +1,12 @@
+name: "Create new release"
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'The version you want to release. (use branch DEVELOP!!!)'
+        required: true
+
+jobs:
+  draft-new-release:
+    uses: bravoure/action-templates/.github/workflows/new-release.yml@main

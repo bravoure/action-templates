@@ -1,0 +1,11 @@
+name: Format (PHP)
+
+on:
+  pull_request:
+    types: [ ready_for_review, opened, synchronize, reopened ]
+    paths:
+      - '**.php'
+
+jobs:
+  housekeeping:
+    uses: bravoure/action-templates/.github/workflows/format-php.yml@main

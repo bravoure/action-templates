@@ -1,0 +1,12 @@
+name: "Create new hotfix"
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'The version you want to release. (use branch MAIN!!!)'
+        required: true
+
+jobs:
+  draft-new-hotfix:
+    uses: bravoure/action-templates/.github/workflows/new-hotfix.yml@main

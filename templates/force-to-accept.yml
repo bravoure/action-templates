@@ -1,0 +1,29 @@
+# if working with a deploy setup that does not support wildcard branch deploys
+name: "Force to accept"
+
+on:
+  push:
+    branches:
+      - 'release/**'
+
+jobs:
+  force-to-accept:
+    name: "Force update accept"
+    runs-on: ubuntu-latest
+    if: contains(github.ref, 'release/')
+    steps:
+      - uses: actions/checkout@v2
+#
+#      - name: Initialize mandatory git config
+#        run: |
+#          git config user.name "GitHub actions"
+#          git config user.email noreply@github.com
+#
+#      - name: Checkout to branch
+#        run: git checkout ${{ github.event.ref }}
+#
+#      - name: Create test branch
+#        run: git checkout -b accept
+#
+#      - name: Push new branch
+#        run: git push origin accept --force
