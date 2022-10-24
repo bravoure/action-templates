@@ -1,0 +1,14 @@
+name: Build, Run, Test, Lint and Succeed.
+
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
+on:
+  workflow_call
+
+jobs:
+  check:
+    uses: bravoure/action-templates/.github/workflows/pull-request-check.yml@main
+    secrets:
+      GH_PAT: ${{ secrets.GH_PAT }}
