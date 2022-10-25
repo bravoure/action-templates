@@ -23,7 +23,9 @@ jobs:
             ## What has been done?
             - [ ] Refactored nice code into beautiful code
             - [ ] Wrote this, and that
+            - [ ] ...
 
+            ## Checklist
             This pr was created when this branch was created, merge it when your feature is finished!
             Of course @${{ github.actor }} never forgets something. But did you check the following?
             - Image sizes are correct. For all our screen sizes.
