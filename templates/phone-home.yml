@@ -1,0 +1,10 @@
+name: "Phone Home NextJS version"
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  phone-home:
+    uses: bravoure/action-templates/.github/workflows/phone-home.yml@main
