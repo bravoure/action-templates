@@ -114,6 +114,7 @@ jobs:
         uses: cypress-io/github-action@v4.2.0
         with:
           working-directory: e2e
+          browser: chrome
 
       - uses: actions/upload-artifact@v3
         if: always()
