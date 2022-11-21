@@ -29,6 +29,38 @@ jobs:
 
       - name: Running linter 🔍
         run: cd frontend && yarn lint-pr
+  
+  phpstan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: "Validate composer.json and composer.lock"
+        working-directory: backend
+        run: "composer validate --strict --no-check-version"
+
+      - name: "Determine composer cache directory"
+        working-directory: backend
+        id: "determine-composer-cache-directory"
+        run: echo "directory=$(composer config cache-dir)" >> $GITHUB_OUTPUT
+
+      - name: "Cache dependencies installed with composer"
+        uses: "actions/cache@v3"
+        with:
+          path: "${{ steps.determine-composer-cache-directory.outputs.directory }}"
+          key: "php-composer-${{ hashFiles('backend/composer.lock') }}"
+          restore-keys: "php-composer-"
+
+      - name: Composer install
+        env: # Or as an environment variable
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+        run: |
+          composer config --global github-oauth.github.com $GITHUB_TOKEN
+          cd backend && composer install
+      - name: Analyze
+        run: |
+          printf "%s\n" "<?php" "	return [" "		'allowAdminChanges' => false" "	];" >backend/config/local_config.php
+          backend/vendor/bin/phpstan --memory-limit=1G --error-format=github
 
   build:
     name: Build & test
