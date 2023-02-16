@@ -4,7 +4,7 @@ name: "Force to accept"
 on:
   push:
     branches:
-      - 'release/**'
+      - "release/**"
 
 jobs:
   force-to-accept:
@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     if: contains(github.ref, 'release/')
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 #
 #      - name: Initialize mandatory git config
 #        run: |

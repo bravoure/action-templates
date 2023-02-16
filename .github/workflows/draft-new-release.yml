@@ -8,7 +8,7 @@ jobs:
     name: "Draft a new release"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: install release-it
         run: npm i -g release-it @release-it/bumper
