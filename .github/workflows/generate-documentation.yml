@@ -4,7 +4,6 @@ on:
   workflow_call:
 
 env:
-  GA_PAT: ${{ secrets.GA_PAT }}
   USER_NAME: bravoure-team
   USER_EMAIL: login@bravoure.nl
   OWNER: ${{ github.event.repository.owner.name }}
