@@ -19,7 +19,7 @@ jobs:
       - uses: baileyjm02/markdown-to-pdf@v1
         with:
           input_dir: wiki
-          output_dir: documentation
+          output_dir: documentation/
           build_html: false
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
