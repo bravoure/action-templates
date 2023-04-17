@@ -8,7 +8,6 @@ on:
   push:
     branches:
       - release/*
-      - featurw/wiki
     paths:
       - 'wiki/**.md'
       - 'wiki/images/**'
