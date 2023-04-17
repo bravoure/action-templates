@@ -19,7 +19,8 @@ jobs:
       - uses: baileyjm02/markdown-to-pdf@v1
         with:
           input_dir: wiki
-          images_dir: iamges
+          images_dir: images
+          table_of_contents: true
           output_dir: documentation/
           build_html: false
       - uses: stefanzweifel/git-auto-commit-action@v4
