@@ -7,7 +7,7 @@ env:
   USER_NAME: bravoure-team
   USER_EMAIL: login@bravoure.nl
   OWNER: ${{ github.event.repository.owner.name }}
-  REPOSITORY_NAME: ${{ github.event.repository.name }}
+  REPOSITORY_NAME: ${{ github.event.repository.name }}xw
 
 jobs:
   publish_docs_to_wiki:
@@ -19,6 +19,7 @@ jobs:
       - uses: baileyjm02/markdown-to-pdf@v1
         with:
           input_dir: wiki
+          images_dir: iamges
           output_dir: documentation/
           build_html: false
       - uses: stefanzweifel/git-auto-commit-action@v4
