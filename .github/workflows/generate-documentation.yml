@@ -20,6 +20,7 @@ jobs:
         with:
           input_dir: wiki
           images_dir: wiki/images
+          image_import: /images
           table_of_contents: true
           output_dir: documentation/
           build_html: false
