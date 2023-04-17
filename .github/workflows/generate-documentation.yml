@@ -19,7 +19,7 @@ jobs:
       - uses: baileyjm02/markdown-to-pdf@v1
         with:
           input_dir: wiki
-          images_dir: images
+          images_dir: wiki/images
           table_of_contents: true
           output_dir: documentation/
           build_html: false
