@@ -7,7 +7,7 @@ concurrency:
 on:
   push:
     branches:
-      - develop
+      - release/*
     paths:
       - 'wiki/**.md'
       - 'wiki/images/**'
