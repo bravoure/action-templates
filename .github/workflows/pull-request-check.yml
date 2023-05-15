@@ -28,7 +28,7 @@ jobs:
         run: cd frontend && yarn install --frozen-lockfile
 
       - name: Running linter 🔍
-        run: cd frontend && yarn lint-pr
+        run: cd frontend && yarn ts-lint-pr && yarn lint-pr
 
   #   phpstan:
   #     name: phpstan
