@@ -94,6 +94,7 @@ jobs:
           build_html: false
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
+          branch: release/${{ github.event.inputs.version }}
           commit_message: Generated pdf version of the docs
       - name: Checkout wiki code
         uses: actions/checkout@v3
