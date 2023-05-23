@@ -80,6 +80,7 @@ jobs:
   publish_docs_to_wiki:
     name: Publish docs to Wiki
     runs-on: ubuntu-latest
+    needs: draft-new-release
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
@@ -111,6 +112,7 @@ jobs:
   checks:
     name: Linter
     runs-on: ubuntu-latest
+    needs: publish_docs_to_wiki
 
     steps:
       - name: Checkout the repository
