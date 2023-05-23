@@ -29,7 +29,7 @@ jobs:
 
       - name: Running linter 🔍
         run: |
-          [ -f /frontend/tsconfig.json ] || cd frontend && yarn ts-lint-pr
+          [ -f /frontend/tsconfig.json ] && cd frontend && yarn ts-lint-pr
           cd frontend && yarn lint-pr
 
   #   phpstan:
