@@ -1,7 +1,6 @@
 name: Sync assets
 on:
-  schedule:
-    - cron: 0 12 * * MON
+  workflow_call:
 
 jobs:
   sync-assets:
