@@ -5,4 +5,4 @@ on:
 
 jobs:
   add_label:
-    uses: bravoure/action-templates/.github/workflows/ready-for-review.yml@main
+    uses: bravoure/action-templates/.github/workflows/sync-assets.yml@main
