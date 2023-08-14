@@ -12,6 +12,7 @@ on:
 jobs:
   sync-assets:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
