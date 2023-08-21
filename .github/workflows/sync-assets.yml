@@ -23,10 +23,10 @@ jobs:
 
       - name: Sync images to accept
         run:
-          aws s3 sync s3://${{ secrets.AWS_S3_BUCKET }}/images s3://${{ secrets.AWS_S3_BUCKET }}/images_accept
+          aws s3 sync s3://${{ secrets.AWS_S3_BUCKET }}/images s3://${{ secrets.AWS_S3_BUCKET }}/images_accept --exclude 'transforms/*'
       - name: Sync images to local
         run:
-          aws s3 sync s3://${{ secrets.AWS_S3_BUCKET }}/images s3://${{ secrets.AWS_S3_BUCKET }}/images_local
+          aws s3 sync s3://${{ secrets.AWS_S3_BUCKET }}/images s3://${{ secrets.AWS_S3_BUCKET }}/images_local --exclude 'transforms/*'
       - name: Sync videos to accept
         run:
           aws s3 sync s3://${{ secrets.AWS_S3_BUCKET }}/videos s3://${{ secrets.AWS_S3_BUCKET }}/videos_accept
