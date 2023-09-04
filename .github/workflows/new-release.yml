@@ -76,40 +76,7 @@ jobs:
             - [ ] External link rel=”noreferrer”
             - [ ] Image alt tags
             - [ ] SSR  of pages (Check in the soucre of the page if the html is there. If you see a loader when loading the page there is an issue.)
-            - [ ] Double check your work with the design file.
-  publish_docs_to_wiki:
-    name: Publish docs to Wiki
-    runs-on: ubuntu-latest
-    needs: draft-new-release
-    steps:
-      - name: Checkout source code
-        uses: actions/checkout@v3
-      - uses: baileyjm02/markdown-to-pdf@v1
-        with:
-          input_dir: wiki
-          images_dir: ./wiki/images
-          image_import: images
-          table_of_contents: true
-          output_dir: documentation/
-          build_html: false
-      - uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          branch: release/${{ github.event.inputs.version }}
-          commit_message: Generated pdf version of the docs
-      - name: Checkout wiki code
-        uses: actions/checkout@v3
-        with:
-          repository: ${{github.repository}}.wiki
-          path: tmp_wiki
-      - name: Push to wiki
-        run: |
-          rsync -av --delete wiki/ tmp_wiki/ --exclude .git
-          cd tmp_wiki
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add .
-          git diff-index --quiet HEAD || git commit -m "Add changes" && git push            
-  
+            - [ ] Double check your work with the design file.  
   checks:
     name: Linter
     runs-on: ubuntu-latest
