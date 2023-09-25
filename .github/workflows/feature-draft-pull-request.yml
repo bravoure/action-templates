@@ -17,7 +17,7 @@ jobs:
         with:
           head: ${{ github.event.ref }}
           base: develop
-          title: Merge ${{ github.event.ref }} into develop branch
+          title: Merge ${{ github.event.ref }} into develop branch by @${{ github.actor }}
           draft: true
           body: |
             ## What has been done?
