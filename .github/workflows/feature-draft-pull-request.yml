@@ -20,29 +20,22 @@ jobs:
           title: Merge ${{ github.event.ref }} into develop branch by @${{ github.actor }}
           draft: true
           body: |
-            ## What has been done?
-            - [ ] Refactored nice code into beautiful code
-            - [ ] Wrote this, and that
-            - [ ] ...
-
-            ## Checklist
-            This pr was created when this branch was created, merge it when your feature is finished!
-            Of course @${{ github.actor }} never forgets something. But did you check the following?
-            - Image sizes are correct. For all our screen sizes.
-            - Checked latest version Chrome (Mac, Windows, ios, Ipad os, android)
-            - Checked latest version Edge (Mac, Windows)
-            - Checked latest version Firefox (Mac, Windows)
-            - Checked latest version Safari (Mac, ios, iPad os)
-            - Checked Desktop
-            - Checked Tablet on a actual tablet or simulator
-            - Checked Mobile on a actual or simulator
-            - Check for iphone 5 screen size. It should just work.
-            - Remove console.logs & commented out code
-            - Check TODO's in code
-            - Correct usage of heading tags (H1, H2, etc)
-            - Animations
-            - Hover states
-            - External link rel=”noreferrer”
-            - Image alt tags
-            - SSR  of pages (Check in the source of the page if the html is there. If you see a loader when loading the page there is an issue.)
-            - Double check your work with the design file.
+            🔗 **Issue Link:** [Link to the associated issue or ticket]
+            
+            ** 📝 Description:**
+            [Provide a brief description of the changes introduced by this pull request.]
+            
+            ## 👀 Testing Instructions
+            
+            Please follow these steps to test the changes:
+            
+            1. [List the testing steps, e.g., "Clone the repository."]
+            2. [List any commands to run or settings to configure, e.g., "Run 'npm install'."]
+            3. [Provide expected outcomes or results, e.g., "The application should start without errors."]
+            
+            ## 🤓 Commit/branch Guidelines
+            
+            - [Use clear and descriptive commit messages.]
+            - [Reference the related issue by naming the branch with a link to ticket (e.g., `git checkout -b "feature/CU-861n9uq1u-Navigation-Menu`).]
+            - [Separate commits for logical changes or features.]
+            - [Ensure each commit is self-contained and functional.
