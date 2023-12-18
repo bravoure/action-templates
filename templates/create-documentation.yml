@@ -1,17 +1,8 @@
-name: Generate documentation.
-
-concurrency:
-  group: ${{ github.ref }}
-  cancel-in-progress: true
+name: "Generate documentation."
 
 on:
-  push:
-    branches:
-      - release/*
-    paths:
-      - 'wiki/**.md'
-      - 'wiki/images/**'
+  workflow_dispatch:
 
 jobs:
-  check:
+  generate-documentation:
     uses: bravoure/action-templates/.github/workflows/generate-documentation.yml@main
