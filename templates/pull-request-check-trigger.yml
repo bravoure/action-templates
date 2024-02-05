@@ -9,6 +9,6 @@ on:
 
 jobs:
   check:
-    uses: bravoure/action-templates/.github/workflows/pull-request-check.yml@main
+    uses: bravoure/action-templates/.github/workflows/v2/pull-request-check.yml@main
     secrets:
       GH_PAT: ${{ secrets.GH_PAT }}

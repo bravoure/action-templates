@@ -1,0 +1,22 @@
+name: Update Browserslist
+
+on:
+  workflow_call:
+
+jobs:
+  update-browserslist:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Start containers
+        run: docker-compose run --rm frontend npx --yes browserslist@latest --update-db
+
+      - name: Commit & push
+        run: |
+          git config user.name "GitHub actions"
+          git config user.email noreply@github.com
+          git fetch
+          [[ "$(git rev-parse HEAD)" == "$(git rev-parse @{u})" ]] && (git diff-index --quiet HEAD || (git commit -a -m'[bot] Updated Browserslist' && git push origin ${{ github.head_ref }}))
