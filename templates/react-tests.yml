@@ -1,0 +1,9 @@
+name: React Tests
+
+on:
+  pull_request:
+    types: [ready_for_review, opened, synchronize, reopened]
+
+jobs:
+  add_label:
+    uses: bravoure/action-templates/.github/workflows/v2/react-tests.yml@main
