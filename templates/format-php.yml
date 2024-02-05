@@ -2,11 +2,11 @@ name: Format (PHP)
 
 on:
   pull_request:
-    types: [ ready_for_review, opened, synchronize, reopened ]
+    types: [ready_for_review, opened, synchronize, reopened]
     paths:
-      - '**.php'
-      - '!backend/translations/**.php'
+      - "**.php"
+      - "!backend/translations/**.php"
 
 jobs:
   housekeeping:
-    uses: bravoure/action-templates/.github/workflows/format-php.yml@main
+    uses: bravoure/action-templates/.github/workflows/v2/format-php.yml@main

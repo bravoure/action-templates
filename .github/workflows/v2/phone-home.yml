@@ -1,0 +1,15 @@
+name: "Phone Home NextJS version"
+
+on:
+  workflow_call:
+
+jobs:
+  phone-home:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+
+      - run: php report-frontend-version.php
+
