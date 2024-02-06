@@ -5,4 +5,4 @@ on:
 
 jobs:
   generate-documentation:
-    uses: bravoure/action-templates/.github/workflows/generate-documentation.yml@v2.0.0
+    uses: bravoure/action-templates/.github/workflows/generate-documentation.yml@v2

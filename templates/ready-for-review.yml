@@ -8,4 +8,4 @@ on:
 
 jobs:
   add_label:
-    uses: bravoure/action-templates/.github/workflows/ready-for-review.yml@v2.0.0
+    uses: bravoure/action-templates/.github/workflows/ready-for-review.yml@v2

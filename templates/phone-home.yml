@@ -7,4 +7,4 @@ on:
 
 jobs:
   phone-home:
-    uses: bravoure/action-templates/.github/workflows/phone-home.yml@v2.0.0
+    uses: bravoure/action-templates/.github/workflows/phone-home.yml@v2
