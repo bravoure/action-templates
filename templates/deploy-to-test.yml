@@ -5,4 +5,4 @@ on:
 
 jobs:
   create-test-branch:
-    uses: bravoure/action-templates/.github/workflows/deploy-to-test.yml@main
+    uses: bravoure/action-templates/.github/workflows/deploy-to-test.yml@v1.0.0

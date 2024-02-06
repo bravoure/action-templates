@@ -9,4 +9,4 @@ on:
 
 jobs:
   housekeeping:
-    uses: bravoure/action-templates/.github/workflows/format-php.yml@main
+    uses: bravoure/action-templates/.github/workflows/format-php.yml@v1.0.0
