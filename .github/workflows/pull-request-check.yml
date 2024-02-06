@@ -22,15 +22,15 @@ jobs:
         uses: actions/setup-node@v3.5.0
         with:
           node-version-file: "frontend/.nvmrc"
-          cache: "yarn"
+          cache: "npm"
 
       - name: Installing dependencies 📦
-        run: cd frontend && yarn install --frozen-lockfile
+        run: cd frontend && npm ci
 
       - name: Running linter 🔍
         run: |
-          [ -f /frontend/tsconfig.json ] && cd frontend && yarn ts-lint-pr
-          cd frontend && yarn lint-pr
+          [ -f /frontend/tsconfig.json ] && cd frontend && npm run ts-lint-pr
+          cd frontend && npm run lint-pr
 
   #   phpstan:
   #     name: phpstan
@@ -123,13 +123,13 @@ jobs:
         uses: actions/setup-node@v3.5.0
         with:
           node-version-file: "frontend/.nvmrc"
-          cache: "yarn"
+          cache: "npm"
 
       - name: Frontend build
         working-directory: frontend
         run: |
-          yarn install --frozen-lockfile
-          yarn run build && (yarn run start&)
+          npm ci
+          npm run build && (npm run start&)
 
       - name: Install Cypress and run tests
         uses: cypress-io/github-action@v4.2.0

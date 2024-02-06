@@ -6,4 +6,4 @@ on:
 
 jobs:
   add_label:
-    uses: bravoure/action-templates/.github/workflows/react-tests.yml@main
+    uses: bravoure/action-templates/.github/workflows/react-tests.yml@v2.0.0

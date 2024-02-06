@@ -9,4 +9,4 @@ on:
 
 jobs:
   draft-new-release:
-    uses: bravoure/action-templates/.github/workflows/new-release.yml@main
+    uses: bravoure/action-templates/.github/workflows/new-release.yml@v2.0.0

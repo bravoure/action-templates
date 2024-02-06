@@ -21,9 +21,9 @@ jobs:
           git config user.email noreply@github.com
 
       # This step will differ depending on your project setup
-      # Fortunately, yarn has a built-in command for doing this!
+      # Fortunately, npm has a built-in command for doing this!
       - name: Bump version in package.json
-        run: yarn version --new-version ${{ github.event.inputs.version }} --no-git-tag-version
+        run: npm version ${{ github.event.inputs.version }} --no-git-tag-version
         working-directory: ./frontend
 
       - name: Commit changelog and manifest files
@@ -108,8 +108,8 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add .
-          git diff-index --quiet HEAD || git commit -m "Add changes" && git push            
-  
+          git diff-index --quiet HEAD || git commit -m "Add changes" && git push
+
   checks:
     name: Linter
     runs-on: ubuntu-latest
@@ -123,15 +123,15 @@ jobs:
         uses: actions/setup-node@v3.5.0
         with:
           node-version-file: "frontend/.nvmrc"
-          cache: "yarn"
+          cache: "npm"
 
       - name: Installing dependencies 📦
-        run: cd frontend && yarn install --frozen-lockfile
+        run: cd frontend && npm ci
 
       - name: Running linter 🔍
         run: |
-          [ -f /frontend/tsconfig.json ] && cd frontend && yarn ts-lint-pr
-          cd frontend && yarn lint-pr
+          [ -f /frontend/tsconfig.json ] && cd frontend && npm run ts-lint-pr
+          cd frontend && npm run lint-pr
   build:
     name: Build & test
     runs-on: ubuntu-latest
@@ -188,4 +188,4 @@ jobs:
         uses: actions/setup-node@v3.5.0
         with:
           node-version-file: "frontend/.nvmrc"
-          cache: "yarn"
+          cache: "npm"
