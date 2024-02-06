@@ -9,4 +9,4 @@ on:
 
 jobs:
   draft-new-hotfix:
-    uses: bravoure/action-templates/.github/workflows/new-hotfix.yml@v1.0.0
+    uses: bravoure/action-templates/.github/workflows/new-hotfix.yml@v1

@@ -5,7 +5,7 @@ on:
 
 jobs:
   add_label:
-    uses: bravoure/action-templates/.github/workflows/sync-assets.yml@v1.0.0
+    uses: bravoure/action-templates/.github/workflows/sync-assets.yml@v1
     secrets:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

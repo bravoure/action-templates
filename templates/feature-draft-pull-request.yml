@@ -6,4 +6,4 @@ on:
 
 jobs:
   feature-draft-pull-request:
-    uses: bravoure/action-templates/.github/workflows/feature-draft-pull-request.yml@v1.0.0
+    uses: bravoure/action-templates/.github/workflows/feature-draft-pull-request.yml@v1
