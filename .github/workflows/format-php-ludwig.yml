@@ -16,7 +16,7 @@ jobs:
       - name: Start containers
         run: docker-compose run --rm php-cs-fixer-ludwig
 
-      - run: rm backend/.env
+      - run: rm ludwig/.env
 
       - name: Commit & push
         run: |
