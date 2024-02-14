@@ -1,5 +1,4 @@
-name: Format PHP
-
+name: Format PHP ludwig
 on:
   workflow_call:
 
@@ -12,15 +11,10 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
 
-      - run: touch backend/.env
+      - run: touch ludwig/.env
 
       - name: Start containers
-        run: docker-compose run --rm php-cs-fixer
-
-#       - name: Start containers
-#         run: |
-#           chmod -R 777 frontend
-#           docker-compose run --rm frontend npx --yes browserslist@latest --update-db
+        run: docker-compose run --rm php-cs-fixer-ludwig
 
       - run: rm backend/.env
 
