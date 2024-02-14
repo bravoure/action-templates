@@ -1,0 +1,26 @@
+name: Format PHP ludwig
+on:
+  workflow_call:
+
+jobs:
+  housekeeping:
+    if:  startsWith(github.head_ref, 'feature/')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+
+      - run: touch ludwig/.env
+
+      - name: Start containers
+        run: docker-compose run --rm php-cs-fixer-ludwig
+
+      - run: rm backend/.env
+
+      - name: Commit & push
+        run: |
+          git config user.name "GitHub actions"
+          git config user.email noreply@github.com
+          git fetch
+          [[ "$(git rev-parse HEAD)" == "$(git rev-parse @{u})" ]] && (git diff-index --quiet HEAD || (git commit -a -m'[bot] Format PHP' && git push origin ${{ github.head_ref }}))
