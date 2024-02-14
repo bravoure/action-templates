@@ -1,4 +1,4 @@
-name: Format PHP and update browserslist
+name: Format PHP
 
 on:
   workflow_call:
