@@ -22,7 +22,7 @@ jobs:
           body: |
             🔗 **Issue Link:** [Link to the associated issue or ticket]
             
-            ** 📝 Description:**
+            📝 **Description:**
             [Provide a brief description of the changes introduced by this pull request.]
             
             ## 👀 Testing Instructions
