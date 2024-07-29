@@ -11,7 +11,7 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
 
-      - run: touch backend/.env
+      - run: touch ludwig/.env
 
       - name: Start containers
         run: docker-compose run --rm php-cs-fixer-ludwig
