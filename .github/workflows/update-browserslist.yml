@@ -12,7 +12,7 @@ jobs:
           ref: ${{ github.head_ref }}
 
       - name: Start containers
-        run: docker-compose run --rm frontend npx --yes browserslist@latest --update-db
+        run: docker compose run --rm frontend npx --yes browserslist@latest --update-db
 
       - name: Commit & push
         run: |
