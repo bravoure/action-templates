@@ -164,20 +164,20 @@ jobs:
           cp frontend/.env.local.actions frontend/.env.local
           printf "%s\n" "<?php" "	return [" "'allowAdminChanges' => false" "];" >backend/config/local_config.php
           composer config --global github-oauth.github.com $GITHUB_TOKEN
-          docker-compose -f docker-compose.ghactions.yml up -d mariadb
+          docker compose -f docker-compose.ghactions.yml up -d mariadb
           cd backend && composer install
 
       - name: Craft install
         run: |
           chmod -R 777 backend/storage
           chmod -R 777 backend/web
-          docker-compose -f docker-compose.ghactions.yml run --rm queue php craft install/craft --email login@bravoure.nl --password bravoure --interactive=0
-          docker-compose -f docker-compose.ghactions.yml run --rm queue php craft project-seeder-module/seeder/seed-db
-          docker-compose -f docker-compose.ghactions.yml run --rm queue php craft resave/entries
+          docker compose -f docker-compose.ghactions.yml run --rm queue php craft install/craft --email login@bravoure.nl --password bravoure --interactive=0
+          docker compose -f docker-compose.ghactions.yml run --rm queue php craft project-seeder-module/seeder/seed-db
+          docker compose -f docker-compose.ghactions.yml run --rm queue php craft resave/entries
 
       - name: Start environment
         run: |
-          docker-compose -f docker-compose.ghactions.yml up -d webserver queue redis backend mariadb
+          docker compose -f docker-compose.ghactions.yml up -d webserver queue redis backend mariadb
 
       # get the node version from the .nvmrc file
       - name: Read .nvmrc
