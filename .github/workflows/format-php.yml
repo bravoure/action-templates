@@ -15,12 +15,12 @@ jobs:
       - run: touch backend/.env
 
       - name: Start containers
-        run: docker-compose run --rm php-cs-fixer
+        run: docker compose run --rm php-cs-fixer
 
 #       - name: Start containers
 #         run: |
 #           chmod -R 777 frontend
-#           docker-compose run --rm frontend npx --yes browserslist@latest --update-db
+#           docker compose run --rm frontend npx --yes browserslist@latest --update-db
 
       - run: rm backend/.env
 
