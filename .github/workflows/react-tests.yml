@@ -13,20 +13,26 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+
       - name: Copy env
         run: cp frontend/.env.local.actions frontend/.env.local
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
+
       - name: Install dependencies
         run: npm install
         working-directory: ./frontend
-      - name: Load .env variables
+
+      - name: Load .env variables and Pass to Steps
+        id: load-env
         run: |
-          if [ -f .env.local ]; then
-            export $(cat .env.local | xargs)
-          fi
+          echo "Loading environment variables from .env.local"
+          cat .env.local | grep -v '^#' | xargs -I {} echo "export {}" >> $GITHUB_ENV
+        working-directory: ./frontend
+
       - name: Run tests
         run: npm run test
         working-directory: ./frontend
