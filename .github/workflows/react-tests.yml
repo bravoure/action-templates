@@ -3,9 +3,6 @@ name: React Tests
 on:
   workflow_call:
 
-env:
-  NEXT_PUBLIC_SITE: beatportal
-  SETTINGS: local
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -16,8 +13,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Copy env
-        run: cp frontend/.env.local.actions frontend/.env.local
+      # - name: Copy env
+      #   run: cp frontend/.env.local.actions frontend/.env.local
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
@@ -25,6 +22,11 @@ jobs:
       - name: Install dependencies
         run: npm install
         working-directory: ./frontend
+      - name: Load .env variables
+        run: |
+          if [ -f .env.local ]; then
+            export $(cat .env.local | xargs)
+          fi
       - name: Run tests
         run: npm run test
         working-directory: ./frontend
