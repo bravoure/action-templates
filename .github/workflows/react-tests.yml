@@ -37,13 +37,6 @@ jobs:
         run: npm install
         working-directory: ./frontend
 
-      - name: Print loaded variables (Debugging)
-        run: |
-          echo "NEXT_PUBLIC_SITE=$NEXT_PUBLIC_SITE"
-          echo "Other Env Vars:"
-          env | grep NEXT_
-        working-directory: ./frontend
-
       - name: Run tests
         run: npm run test
         working-directory: ./frontend
