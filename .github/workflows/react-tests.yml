@@ -3,6 +3,9 @@ name: React Tests
 on:
   workflow_call:
 
+env:
+  NEXT_PUBLIC_SITE: beatportal
+  SETTINGS: local
 jobs:
   test:
     runs-on: ubuntu-latest
