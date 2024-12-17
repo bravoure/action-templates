@@ -16,7 +16,6 @@ jobs:
 
       - name: Copy env file
         run: cp frontend/.env.local.actions frontend/.env.local
-        working-directory: ./frontend
 
       - name: Load .env variables into GITHUB_ENV
         run: |
