@@ -14,8 +14,20 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Copy env
+      - name: Copy env file
         run: cp frontend/.env.local.actions frontend/.env.local
+        working-directory: ./frontend
+
+      - name: Load .env variables into GITHUB_ENV
+        run: |
+          echo "Loading environment variables from .env.local"
+          while IFS='=' read -r key value; do
+            # Ignore comments and empty lines
+            if [[ ! "$key" =~ ^# && -n "$key" ]]; then
+              echo "$key=$value" >> $GITHUB_ENV
+            fi
+          done < ./frontend/.env.local
+        shell: bash
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
@@ -26,11 +38,11 @@ jobs:
         run: npm install
         working-directory: ./frontend
 
-      - name: Load .env variables and Pass to Steps
-        id: load-env
+      - name: Print loaded variables (Debugging)
         run: |
-          echo "Loading environment variables from .env.local"
-          cat .env.local | grep -v '^#' | xargs -I {} echo "export {}" >> $GITHUB_ENV
+          echo "NEXT_PUBLIC_SITE=$NEXT_PUBLIC_SITE"
+          echo "Other Env Vars:"
+          env | grep NEXT_
         working-directory: ./frontend
 
       - name: Run tests
