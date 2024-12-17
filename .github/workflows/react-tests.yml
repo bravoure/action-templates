@@ -2,6 +2,9 @@ name: React Tests
 
 on:
   workflow_call:
+    secrets:
+      NEXT_PUBLIC_SITE:
+        required: true
 
 jobs:
   test:
