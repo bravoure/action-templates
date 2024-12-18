@@ -1,0 +1,9 @@
+name: Update PR Description
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  housekeeping:
+    uses: bravoure/action-templates/.github/workflows/update-pr-description.yml@v2
