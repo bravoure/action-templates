@@ -89,7 +89,9 @@ jobs:
         with:
           path: "${{ steps.determine-composer-cache-directory.outputs.directory }}"
           key: "php-composer-${{ hashFiles('backend/composer.lock') }}"
-          restore-keys: "php-composer-"
+          restore-keys: |
+            php-composer-${{ hashFiles('backend/composer.lock') }}
+            php-composer-
 
       - name: Composer install
         env: # Or as an environment variable
