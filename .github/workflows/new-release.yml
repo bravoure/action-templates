@@ -154,11 +154,14 @@ jobs:
         with:
           path: "${{ steps.determine-composer-cache-directory.outputs.directory }}"
           key: "php-composer-${{ hashFiles('backend/composer.lock') }}"
-          restore-keys: "php-composer-"
+          restore-keys: |
+            php-composer-${{ hashFiles('backend/composer.lock') }}
+            php-composer-
 
       - name: Composer install
         env: # Or as an environment variable
           GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+        if: steps.composer-cache.outputs.cache-hit != 'true'
         run: |
           cp backend/.env.actions.example backend/.env
           cp frontend/.env.local.actions frontend/.env.local
