@@ -167,4 +167,8 @@ jobs:
       - name: Webserver logs
         if: always()
         run: |
-          docker-compose -f docker-compose.ghactions.yml logs webserver
+          if docker compose -f docker-compose.ghactions.yml ps | grep webserver; then
+            docker compose -f docker-compose.ghactions.yml logs webserver
+          else
+            echo "docker container webserver is not running, skipping webserver logs."
+          fi
