@@ -63,6 +63,8 @@ jobs:
           cp backend/.env.actions.example backend/.env
           cp frontend/.env.local.actions frontend/.env.local
           printf "%s\n" "<?php" "	return [" "'allowAdminChanges' => false" "];" >backend/config/local_config.php
+          # Ensure .env is writable
+          chmod 666 backend/.env
           composer config --global github-oauth.github.com $GITHUB_TOKEN
           docker compose -f docker-compose.ghactions.yml up -d database
           cd backend && composer install
