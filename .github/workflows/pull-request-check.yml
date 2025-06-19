@@ -66,7 +66,10 @@ jobs:
           chmod 666 backend/.env
           composer config --global github-oauth.github.com $GITHUB_TOKEN
           docker compose -f docker-compose.ghactions.yml up -d database
-          cd backend && composer install
+          cd backend
+          composer clear-cache
+          rm -rf vendor
+          composer install
 
       - name: Craft install
         run: |
