@@ -71,11 +71,6 @@ jobs:
           rm -rf vendor
           composer install
           composer show craftcms/cms
-          
-      - name: Debug Craft version in queue container
-        run: |
-          docker compose -f docker-compose.ghactions.yml run --rm queue php craft --version
-          docker compose -f docker-compose.ghactions.yml run --rm queue composer show craftcms/cms
 
       - name: Craft install
         run: |
